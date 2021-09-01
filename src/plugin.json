@@ -1,0 +1,58 @@
+{
+  "$schema": "https://raw.githubusercontent.com/grafana/grafana/master/docs/sources/developers/plugins/plugin.schema.json",
+  "type": "datasource",
+  "name": "check_mk-datasource",
+  "id": "bw-check-mk-datasource",
+  "metrics": true,
+  "info": {
+    "description": "Better Datasource plugin for check_mk",
+    "author": {
+      "name": "ruohki",
+      "url": ""
+    },
+    "keywords": [],
+    "logos": {
+      "small": "img/logo.svg",
+      "large": "img/logo.svg"
+    },
+    "links": [
+      {
+        "name": "Website",
+        "url": "https://github.com/grafana/grafana-starter-datasource"
+      },
+      {
+        "name": "License",
+        "url": "https://github.com/grafana/grafana-starter-datasource/blob/master/LICENSE"
+      }
+    ],
+    "screenshots": [],
+    "version": "%VERSION%",
+    "updated": "%TODAY%"
+  },
+  "routes": [{
+    "path": "check_mk_test",
+    "url": "{{ .JsonData.url }}/check_mk/webapi.py",
+    "urlParams": [
+      {
+        "name": "action",
+        "content": "get_host_names"
+      },
+      {
+        "name": "output_format",
+        "content": "json"
+      },
+      {
+        "name": "_username",
+        "content": "{{ .JsonData.username }}"
+      },
+      {
+        "name": "_secret",
+        "content": "{{ .SecureJsonData.password }}"
+      }
+    ] 
+  }],
+  "dependencies": {
+    "grafanaDependency": ">=7.0.0",
+    "plugins": []
+  }
+}
